@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth/me', {
+      const response = await fetch(`${API_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -53,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -78,7 +80,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (email, phone, password, name, lastname) => {
     try {
       console.log('Sending register request to:', 'http://localhost:3001/api/auth/register');
-      const response = await fetch('http://localhost:3001/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, phone, password, name, lastname })
@@ -114,7 +116,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchBalance = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/user/balance', {
+      const response = await fetch(`${API_URL}/api/user/balance`, {
         headers: getAuthHeaders()
       });
       if (response.ok) {

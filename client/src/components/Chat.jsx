@@ -3,6 +3,8 @@ import { Send, Bot, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 function Chat() {
   const [messages, setMessages] = useState([
     { role: 'model', content: 'Salam! Mən "Yoldaş"am. 🚗\nSizə yol hərəkəti qaydaları və cərimələr barədə kömək etməyə hazıram.\nSualınızı yazın və mən sizə cavab verəcəyəm.' }
@@ -43,7 +45,7 @@ function Chat() {
     setIsChatting(true);
 
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({

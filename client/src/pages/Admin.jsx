@@ -3,6 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Users, Plus, History, LogOut, Trash2 } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 function Admin() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,7 @@ function Admin() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/admin/users', {
+      const response = await fetch(`${API_URL}/api/admin/users`, {
         headers: getAuthHeaders()
       });
       if (response.ok) {
@@ -47,7 +49,7 @@ function Admin() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/admin/add-tokens', {
+      const response = await fetch(`${API_URL}/api/admin/add-tokens`, {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({ userId, amount: parseInt(tokenAmount) })
@@ -71,7 +73,7 @@ function Admin() {
 
   const fetchTransactions = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/admin/transactions/${userId}`, {
+      const response = await fetch(`${API_URL}/api/admin/transactions/${userId}`, {
         headers: getAuthHeaders()
       });
       if (response.ok) {
@@ -92,7 +94,7 @@ function Admin() {
 
   const handleDeleteUser = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/admin/users/${userId}`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: getAuthHeaders()
       });
