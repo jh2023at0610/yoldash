@@ -271,8 +271,8 @@ app.delete('/api/admin/users/:userId', authenticate, adminAuth, async (req, res)
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Delete user's transactions
-        const transactions = await TokenTransaction.getByUserId(userId);
+        // Delete user's transactions (unordered for delete - no index needed)
+        const transactions = await TokenTransaction.getByUserId(userId, false);
         const batch = db.batch();
         transactions.forEach(transaction => {
             const transactionRef = db.collection('tokenTransactions').doc(transaction.id);

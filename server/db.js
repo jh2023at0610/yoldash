@@ -146,11 +146,16 @@ const TokenTransaction = {
     await db.collection(TRANSACTIONS_COLLECTION).add(transactionData);
   },
 
-  getByUserId: async (userId) => {
-    const snapshot = await db.collection(TRANSACTIONS_COLLECTION)
-      .where('userId', '==', userId)
-      .orderBy('timestamp', 'desc')
-      .get();
+  getByUserId: async (userId, ordered = true) => {
+    let query = db.collection(TRANSACTIONS_COLLECTION)
+      .where('userId', '==', userId);
+    
+    // Only add orderBy if needed (requires composite index)
+    if (ordered) {
+      query = query.orderBy('timestamp', 'desc');
+    }
+    
+    const snapshot = await query.get();
 
     return snapshot.docs.map(doc => ({
       id: doc.id,
