@@ -7,7 +7,7 @@ const path = require('path');
 require('dotenv').config();
 
 // Initialize Firebase and database
-let User, TokenTransaction, db, generateToken, authenticate, checkTokenBalance, deductToken, adminAuth;
+let User, TokenTransaction, db, generateToken, authenticate, checkTokenBalance, deductToken, adminAuth, notifyNewUser;
 try {
   const dbModule = require('./db');
   User = dbModule.User;
@@ -22,6 +22,8 @@ try {
   deductToken = tokenCheckModule.deductToken;
   const adminAuthModule = require('./middleware/adminAuth');
   adminAuth = adminAuthModule.adminAuth;
+  const telegramModule = require('./telegram');
+  notifyNewUser = telegramModule.notifyNewUser;
   console.log('✓ Database and auth modules loaded');
 } catch (error) {
   console.error('✗ Failed to load database/auth modules:', error.message);
@@ -104,6 +106,9 @@ try {
         const user = await User.findById(result.id);
 
         const token = generateToken(user.id);
+
+        // Send Telegram notification
+        notifyNewUser(user).catch(err => console.error('Telegram notification error:', err));
 
         res.status(201).json({
             success: true,
