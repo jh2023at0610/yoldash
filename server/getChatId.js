@@ -1,7 +1,14 @@
 // Helper script to get your Telegram Chat ID
+// Usage: TELEGRAM_BOT_TOKEN=your_token node getChatId.js
 const fetch = require('node-fetch');
 
-const BOT_TOKEN = '8585396025:AAFG_2c0GR4_rz-8nTz0_5Opco9KM1mJtes';
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+
+if (!BOT_TOKEN) {
+  console.error('Error: TELEGRAM_BOT_TOKEN environment variable not set');
+  console.log('Usage: TELEGRAM_BOT_TOKEN=your_token node getChatId.js');
+  process.exit(1);
+}
 
 async function getChatId() {
   try {

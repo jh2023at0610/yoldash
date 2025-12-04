@@ -7,12 +7,14 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Chat from './components/Chat';
 import Admin from './pages/Admin';
+import Landing from './pages/Landing';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/landing" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

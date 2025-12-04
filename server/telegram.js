@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
 
 const sendTelegramNotification = async (message) => {
   if (!BOT_TOKEN || !CHAT_ID) {
