@@ -45,7 +45,9 @@ app.use((req, res, next) => {
 // Middleware
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://yoldash.vercel.app'
+  'https://yoldash.vercel.app',
+  'https://yoldash.live',
+  'https://www.yoldash.live'
 ];
 
 app.use(cors({
