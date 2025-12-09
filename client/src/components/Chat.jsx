@@ -62,9 +62,14 @@ function Chat() {
         }
         if (response.status === 403) {
           const errorData = await response.json();
+          const errorMessage = errorData.error || 'Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın: support@yoldash.live';
+          // Ensure email is included if not already present
+          const finalMessage = errorMessage.includes('support@yoldash.live') 
+            ? errorMessage 
+            : `${errorMessage} support@yoldash.live`;
           setMessages(prev => [...prev, { 
             role: 'model', 
-            content: `⚠️ ${errorData.error || 'Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın.'}` 
+            content: `⚠️ ${finalMessage}` 
           }]);
           await fetchBalance();
           return;
@@ -163,7 +168,7 @@ function Chat() {
         {balance <= 0 ? (
           <div className="max-w-4xl mx-auto text-center py-4">
             <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg">
-              <p className="font-medium">Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın.</p>
+              <p className="font-medium">Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın: <a href="mailto:support@yoldash.live" className="underline font-semibold">support@yoldash.live</a></p>
             </div>
           </div>
         ) : (

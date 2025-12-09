@@ -7,8 +7,9 @@ const checkTokenBalance = async (req, res, next) => {
 
     if (balance <= 0) {
       return res.status(403).json({ 
-        error: 'Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın.',
-        balance: 0
+        error: 'Balansınız bitib. Xidmət üçün müştəri xidməti ilə əlaqə saxlayın: support@yoldash.live',
+        balance: 0,
+        supportEmail: 'support@yoldash.live'
       });
     }
 
