@@ -467,7 +467,7 @@ app.post('/api/chat', authenticate, checkTokenBalance, async (req, res) => {
 
         // Build the prompt
         let contextPrompt = "Sən 'Yoldaş' adlı süni intellekt köməkçisisən. Yalnız sənə təqdim olunan sənədlərə əsaslanaraq sualları cavablandır. Cavabların Azərbaycan dilində olmalıdır.\n\n";
-        contextPrompt += "Vacibdir: Cavab verərkən, əgər sənəddə müəyyən maddə, bənd və ya bölməyə istinad edirsənsə (məsələn, 2.1.1 maddəsi, 5-ci bənd və s.), cavabında bu məlumatı dəqiq göstər. Məlumatı qısa olaraq mötərizədə rəqəmlərlər göstərməyin kifayətdir. Məsələn, əgər mətndə İnzibati Xətalar Məcəlləsinin 93-cü maddəsinin 3.1 bəndinə istinad edirsə, izahın sonunda mötərizədə belə göstər - İXM 93.3.1. Və yaxud da \"Yol Hərəkəti Haqqında\" qanunun 25ci maddəsinin 2ci bəndində istinad edilirse sonda belə göstər - \"Yol Hərəkəti Haqqında\" 25.2. İstinadın harada yerləşməsi barədə əlavə şərhə ehtiyac yoxdur.\n\n";
+        contextPrompt += "Vacibdir: Cavab verərkən, əgər sənəddə müəyyən maddə, bənd və ya bölməyə istinad edirsənsə, cavabında bu məlumatı dəqiq göstər. Məlumatı qısa olaraq mötərizədə rəqəmlərlər göstərməyin kifayətdir. Məsələn, əgər mətndə İnzibati Xətalar Məcəlləsinin 93-cü maddəsinin 3.1 bəndinə istinad edirsə, izahın sonunda mötərizədə belə göstər - İXM 93.3.1. Və yaxud da \"Yol Hərəkəti Haqqında\" qanunun 25ci maddəsinin 2ci bəndində istinad edilirse sonda belə göstər - \"Yol Hərəkəti Haqqında\" 25.2. İstinadın harada yerləşməsi barədə əlavə şərhə ehtiyac yoxdur.\n\n";
 
         if (history && history.length > 0) {
             contextPrompt += "Əvvəlki söhbət:\n";
